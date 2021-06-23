@@ -12,10 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
-  final pages = [
-    Container(color: Colors.red),
-    Container(color: Colors.blue)
-  ];
+  final pages = [Container(color: Colors.red), Container(color: Colors.blue)];
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +54,7 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                   onPressed: () {
                     controller.setPage(0);
+                    setState(() {});
                   },
                   icon: Icon(
                     Icons.home,
@@ -81,6 +79,7 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                   onPressed: () {
                     controller.setPage(1);
+                    setState(() {});
                   },
                   icon:
                       Icon(Icons.description_outlined, color: AppColors.body)),
