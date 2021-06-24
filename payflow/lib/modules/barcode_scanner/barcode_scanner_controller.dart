@@ -11,7 +11,7 @@ class BarCodeScannerController {
 
   BarcodeScannerStatus get status => statusNotifier.value;
   set status(BarcodeScannerStatus status) => statusNotifier.value = status;
-  
+
   final barcodeScanner = GoogleMlKit.vision.barcodeScanner();
 
   void getAvailableCameras() async {
@@ -22,6 +22,7 @@ class BarCodeScannerController {
       );
       final cameraController =
           CameraController(camera, ResolutionPreset.max, enableAudio: false);
+      await cameraController.initialize();
       status = BarcodeScannerStatus.available(cameraController);
       scanWithCamera();
     } catch (e) {
@@ -112,5 +113,13 @@ class BarCodeScannerController {
           print(e);
         }
       });
+  }
+
+  void dispose() {
+    statusNotifier.dispose();
+    barcodeScanner.close();
+    if (status.showCamera) {
+      status.cameraController!.dispose();
+    }
   }
 }
