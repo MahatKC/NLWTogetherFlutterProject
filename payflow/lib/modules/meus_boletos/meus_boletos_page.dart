@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:payflow/shared/models/boleto_model.dart';
 import 'package:payflow/shared/themes/app_colors.dart';
@@ -19,7 +20,7 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-          child: Column(
+      child: Column(
         children: [
           Container(
             height: 80,
@@ -29,8 +30,9 @@ class _MeusBoletosPageState extends State<MeusBoletosPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: ValueListenableBuilder<List<BoletoModel>>(
                   valueListenable: controller.boletosNotifier,
-                  builder: (_, boletos, __) =>
-                      AnimatedCard(child: BoletoInfoWidget(size: boletos.length)),
+                  builder: (_, boletos, __) => AnimatedCard(
+                      direction: AnimatedCardDirection.top,
+                      child: BoletoInfoWidget(size: boletos.length)),
                 ),
               ),
             ]),
